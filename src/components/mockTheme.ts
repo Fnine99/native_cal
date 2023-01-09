@@ -1,24 +1,27 @@
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 
-export const themeColor = '#00AAAF';
-export const lightThemeColor = '#f2f7f7';
+export const themeColor = '#3D3D3E';
+export const lightThemeColor = '#000001';
 
 export function getTheme() {
   const disabledColor = 'grey';
 
   return {
+    // calendar
+    backgroundColor: '#000001',
+    calendarBackground: '#000001',
     // arrows
     arrowColor: 'black',
     arrowStyle: {padding: 0},
     // knob
     expandableKnobColor: themeColor,
     // month
-    monthTextColor: 'black',
+    monthTextColor: themeColor,
     textMonthFontSize: 16,
     textMonthFontFamily: 'HelveticaNeue',
     textMonthFontWeight: 'bold' as const,
     // day names
-    textSectionTitleColor: 'black',
+    textSectionTitleColor: themeColor,
     textDayHeaderFontSize: 12,
     textDayHeaderFontFamily: 'HelveticaNeue',
     textDayHeaderFontWeight: 'normal' as const,

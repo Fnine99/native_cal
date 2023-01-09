@@ -1,7 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
-import React, {useCallback} from 'react';
+import React, {useCallback, useMemo, useEffect} from 'react';
 import {StyleSheet, Alert, View, Text, TouchableOpacity, Button} from 'react-native';
-
+import { theme } from 'theme';
 
 interface ItemProps {
   item: any;
@@ -46,13 +46,14 @@ export default React.memo(AgendaItem);
 const styles = StyleSheet.create({
   item: {
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: theme.primary,
     borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
-    flexDirection: 'row'
+    // borderBottomColor: 'lightgrey',
+    flexDirection: 'row',
+    borderRadius: 10
   },
   itemHourText: {
-    color: 'black'
+    color: 'white'
   },
   itemDurationText: {
     color: 'grey',
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     marginLeft: 4
   },
   itemTitleText: {
-    color: 'black',
+    color: 'white',
     marginLeft: 16,
     fontWeight: 'bold',
     fontSize: 16

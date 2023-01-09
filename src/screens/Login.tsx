@@ -1,130 +1,221 @@
-import { Dimensions } from 'react-native';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import {
-    View,
-    Text,
-    TouchableOpacity,
-    Image,
-    TextInput,
+  Dimensions,
+  Platform,
+  Keyboard,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  StyleSheet,
 } from 'react-native';
 
-const { width: ScreenWidth } = Dimensions.get("screen");
+import { theme } from 'theme';
+
+import Input from 'components/common/Imput';
+import Button from 'components/common/Button';
+import Container from 'components/common/Container';
+import Icon from 'components/common/Icon';
+
+import useAuth from 'hooks/useAuth';
+
+const { width: ScreenWidth, height: ScreenHeight } = Dimensions.get("screen");
+
+interface AuthForm {
+  credentials: {
+    userName: string,
+    userPassword: string
+  } 
+}
 
 export default function Login() {
-  // const disablePasswordInput = true;
+
+  const { firebaseFacebookSignIn, firebaseGoogleSignIn, firebaseRegister, firebaseEmailPasswordSignIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
+
+
+  const [form, setForm] = useState({});
+  
+  const [secureEntry, setSecureEntry] = useState(true);
+
+  const onChange = ({name, value}) => {
+    setForm({...form, [name]: value});
+  };
+
+  // const onChange = ({name, value})=>{
+  //   return ()=> {
+  //     setForm({...form, [name]: value})
+  //     console.log(form);
+  //   };
+  // }
+
+  const HandleLogin = async () => {
+    try {
+      await firebaseEmailPasswordSignIn(form.userName, form.userPassword)
+      .then(setForm({...form, userPassword: null}));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const HandleSignup = async () => {
+    try {
+      await firebaseRegister(form.userName, form.userPassword)
+      .then(setForm({...form, userPassword: null}));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const HandleGoogleLoggin = async () => {
+    try {
+      await firebaseGoogleSignIn();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const HandleFacebookLoggin = async () => { 
+    try {
+      await firebaseFacebookSignIn();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
-    <View 
-      style={{ 
-        flex: 1,
-        backgroundColor: '#FEFEFE'
-      }}>
+    <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
+    <View style={styles.container}>
+      {/* top container */}
       <View 
-        style={{ 
-          height:'35%',
-          backgroundColor:'transparent',
-          alignItems:'center',
-          justifyContent:'center'
-        }}>
-        <Text>Logo</Text>
+        style={styles.topContainer}>
+        <Image source={require('../../assets/Earth.jpg')} style={{width:'100%', height:'100%'}}/>
       </View>
-      <View 
-        style={{ 
-          position:'absolute',
-          bottom: 0,
-          height:'65%',
-          width:ScreenWidth,
-          alignItems:'center',
-          // justifyContent:'center'
-        }}>         
-          <TextInput 
-            style={{
-              marginTop: 20,
-              height: 40,
-              width:ScreenWidth*0.8,
-              backgroundColor:'#EAF2FE',
-              borderColor: '#EFF0F0',
-              borderStyle: 'solid',
-              borderWidth: 1/3,
-              borderRadius: 7,
-              fontSize:16,
-              elevation: 5,
+      {/* bottom container */}
+      <View style={styles.bottomContainer}>
+        {/* imputs and login button container */}
+        <KeyboardAvoidingView style={[styles.container, {marginTop:30}]} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+          <Input
+            // label='Username'
+            iconPosition="right"
+            placeholder="Enter Email"
+            value={form.userName || null}
+            onChangeText={(value) => {
+              onChange({name: 'userName', value});
             }}
-            placeholder='Username'
           />
-          <TextInput 
-            style={{ 
-              marginTop: 15,
-              height: 40,
-              width: ScreenWidth*0.8,
-              backgroundColor:'#EAF2FE',
-              borderColor: '#EFF0F0',
-              borderStyle: 'solid',
-              borderWidth: 1/3,
-              borderRadius: 7,
-              fontSize:16,
-              elevation: 5,
-            }} 
-            placeholder='Password'
+          <Input
+            // label='Password'
+            icon={
+              <TouchableOpacity
+                hitSlop={{top:3, bottom:3}}
+                onPress={() => {
+                  setSecureEntry((secure) => !secure);
+                }}>
+                {secureEntry ? <Icon type="ionicon" name="eye-outline" style={styles.icon} size="20px"/>  : <Icon type="ionicon" name="eye-off-outline" style={styles.icon} size="20px"/>}
+              </TouchableOpacity>
+            }
+            iconPosition="right"
+            placeholder="Enter Password"
+            value={form.userPassword || null}
+            onChangeText={(value) => {
+              onChange({name: 'userPassword', value});
+            }}
+            secureTextEntry={secureEntry}
           />
-          <View 
-            style={{
-              flexDirection: 'row',
-              marginTop: 32,
-            }}>
-            <TouchableOpacity 
-              style={{
-                height: 37,
-                width: ScreenWidth * 0.35,
-                backgroundColor: "#5096FE",
-                borderRadius: 6,
-                alignItems: "center",
-                justifyContent: "center",
-                alignSelf: "center",
-                marginRight: 10,
-                elevation: 5,
-                shadowRadius: 8,
-                shadowOpacity: 0.3,
-                shadowColor: "#166080",
-                shadowOffset: {
-                  width: 0,
-                  height: 3,
-                },
-              }}>
-              <Text style={{color:'#fff', fontSize:16, fontWeight:'bold'}}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                height: 37,
-                width: ScreenWidth * 0.35,
-                backgroundColor: "#5096FE",
-                borderRadius: 6,
-                alignItems: "center",
-                justifyContent: "center",
-                alignSelf: "center",
-                // marginTop: 16,
-                elevation: 5,
-                shadowRadius: 8,
-                shadowOpacity: 0.3,
-                shadowColor: "#166080",
-                shadowOffset: {
-                  width: 0,
-                  height: 3,
-                },
-              }}>
-              <Text style={{color:'#fff', fontSize:16, fontWeight:'bold'}}>Sign up</Text>
-            </TouchableOpacity>  
-          </View>        
-          <View 
-            style={{
-              flexDirection: 'row',
-              marginTop: 32,
-            }}>
-            <Text style={{marginRight:5}}>Logo1</Text>
-            <Text style={{marginRight:5}}>Logo2</Text>
-            <Text style={{marginRight:5}}>Logo3</Text>
-            <Text>Logo4</Text>
+          <TouchableOpacity 
+            style={[styles.button, {marginTop: 20}]}
+            onPress={HandleLogin}
+            >
+            <Text style={{color:'#fff', fontSize:16, fontWeight:'bold'}}>Login</Text>
+          </TouchableOpacity>
+          {/* divider */}
+          <View style={styles.dividerContainer}>
+            <View style={styles.divider}/>
+            <Text style={styles.text}>Or</Text>
+            <View style={styles.divider}/>
           </View>
+          {/* social connection container */}
+          <View style={styles.container}>
+            <TouchableOpacity onPress={HandleGoogleLoggin}>
+              <View style={styles.socials}>
+                <Icon style={styles.icon} type='fa' name='google' size='20px'/>
+                <Text style={styles.text}>Login with Google</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={HandleFacebookLoggin}>
+              <View style={styles.socials}>
+                <Icon style={styles.icon} type='fa' name='facebook-official' size='20px'/>
+                <Text style={styles.text}>Login with Facebook</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          {/* register msg */}
+          <View style={{flexDirection:'row', justifyContent:'center', marginTop: 10}}>
+            <Text style={styles.text}>Do not have an accout yet?</Text>
+            <TouchableOpacity onPress={HandleSignup}><Text style={styles.text} > Register</Text></TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>  
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
+const styles = StyleSheet.create({
+  topContainer : {alignItems:'center', justifyContent:'center', width: ScreenWidth, height:ScreenHeight*0.3},
+  bottomContainer : {alignItems:'center', width: ScreenWidth, height:ScreenHeight*0.6, position:'absolute', bottom:0},
+  container: {flex:1, backgroundColor:theme.backgroundColor, justifyContent:'center'},
+  icon: {color:'white'},
+  divider : {
+    borderBottomColor: 'white', 
+    borderBottomWidth: StyleSheet.hairlineWidth, 
+    width:ScreenWidth*0.25
+  },
+  dividerContainer: {
+    flexDirection:'row', 
+    justifyContent:'space-evenly',
+    alignItems:'center', 
+    marginVertical: 20,
+    width: ScreenWidth * 0.8
+  },
+  button: {
+    height: 37,
+    width: ScreenWidth * 0.80,
+    backgroundColor: theme.secondary,
+    borderRadius: 4,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    marginRight: 10,
+    elevation: 5,
+    shadowRadius: 8,
+    shadowOpacity: 0.3,
+    shadowColor: "#166080",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+  },
+  socials: {
+    width: ScreenWidth*0.8,
+    borderRadius: 4,
+    borderColor: 'white',
+    borderWidth: 1/2,
+    paddingHorizontal: 40,
+    paddingVertical: 10,
+    alignItems: 'center',   
+    justifyContent:'space-between',
+    flexDirection:'row',
+    marginBottom: 10
+  },
+  buttonText: { },
+  text: {
+    color: theme.text.primary, 
+    fontWeight:'bold', 
+    fontSize:14, 
+    fontStyle: 'normal', 
+    fontFamily:'Helvetica'
+  }
+});

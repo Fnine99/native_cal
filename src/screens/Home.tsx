@@ -1,7 +1,9 @@
 import {
     View,
-    Text
+    Text,
+    StyleSheet
 } from 'react-native';
+import useAuth from 'hooks/useAuth';
 
 import Calendar from 'components/Calendar';
 import Agenda from 'components/Agenda';
@@ -19,31 +21,16 @@ export default function Home() {
       <View 
         style={{ 
           height:'100%',
-          backgroundColor:'lightgreen',
+          backgroundColor:'#000001',
           alignItems:'center',
           justifyContent:'center'
         }}>
         <Calendar /> 
       </View>
-      {/* <View 
-        style={{ 
-          position:'absolute',
-          bottom: 0,
-          height:'40%',
-          width:'100%',
-          backgroundColor: 'lightblue',
-          borderTopLeftRadius:20,
-          borderTopRightRadius:20,
-          alignItems:'center',
-          justifyContent:'center'
-        }}> 
-            <View 
-             style={{
-              flexDirection: 'row' 
-             }}>
-             <Agenda />
-            </View>
-      </View> */}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+
+})
