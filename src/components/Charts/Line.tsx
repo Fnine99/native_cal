@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import Props from './props';
+import Props from './chartprop';
 
 
 const LineGraph = ({data}: Props) => {

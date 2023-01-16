@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { createContext, useEffect, useReducer } from 'react';
+import { createContext, useEffect, useReducer, ReactNode } from 'react';
 
 // third-party
 import firebase from 'firebase/compat/app';
@@ -28,7 +28,7 @@ const initialState = {
 
 const FirebaseContext = createContext(null);
 
-export const FirebaseProvider = ({ children }) => {
+export const FirebaseProvider = ( children: ReactNode ) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   useEffect(

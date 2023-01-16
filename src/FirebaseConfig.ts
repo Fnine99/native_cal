@@ -1,6 +1,3 @@
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-
 const FIREBASE_APP = {
     apiKey: "AIzaSyDST4liACzDMmE3ec6HnNUtQwON5Ri6DZw",
     authDomain: "react-cal-bc010.firebaseapp.com",
@@ -12,5 +9,3 @@ const FIREBASE_APP = {
   }
 
 export default FIREBASE_APP;
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "target": "esnext",
-    // "strict": true,
+    "strict": true,
     "baseUrl": ".",
     "paths": {
       "*": ["src/*"],
@@ -11,7 +11,7 @@
       "@components/*": ["src/components/*"],
     },
     "allowSyntheticDefaultImports": true,
-    // "moduleResolution": "node",
+    "moduleResolution": "node",
     "types": [
       "react-native",
       "jest"

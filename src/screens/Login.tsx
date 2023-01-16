@@ -38,18 +38,12 @@ export default function Login() {
 
   const [form, setForm] = useState({});
   
+  // theres a common react bug when toggling this value. either fix it to secure entry or look it up, theres is 1 or 2 fixes
   const [secureEntry, setSecureEntry] = useState(true);
 
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
   };
-
-  // const onChange = ({name, value})=>{
-  //   return ()=> {
-  //     setForm({...form, [name]: value})
-  //     console.log(form);
-  //   };
-  // }
 
   const HandleLogin = async () => {
     try {
@@ -164,9 +158,9 @@ export default function Login() {
   );
 }
 const styles = StyleSheet.create({
+  container: {flex:1, backgroundColor:theme.backgroundColor},
   topContainer : {alignItems:'center', justifyContent:'center', width: ScreenWidth, height:ScreenHeight*0.3},
   bottomContainer : {alignItems:'center', width: ScreenWidth, height:ScreenHeight*0.6, position:'absolute', bottom:0},
-  container: {flex:1, backgroundColor:theme.backgroundColor, justifyContent:'center'},
   icon: {color:'white'},
   divider : {
     borderBottomColor: 'white', 

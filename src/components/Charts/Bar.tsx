@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
-import Props from './props'
+import Props from './chartprop'
 
 
 const BarGraph = ({data}: Props ) => {

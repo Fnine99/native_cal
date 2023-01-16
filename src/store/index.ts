@@ -21,4 +21,4 @@ const { dispatch } = store;
 const useDispatch = () => useAppDispatch();
 const useSelector = useAppSelector;
 
-export {store, dispatch, useSelector, useDispatch};
+export {store, persister, dispatch, useSelector, useDispatch};

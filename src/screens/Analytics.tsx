@@ -28,14 +28,6 @@ const Analytics = () => {
   const [timeframe, setTimeframe] = useState('Week');
   const [activeTab, setActiveTab] = useState('Summary');
 
-  const handleTimeframeChange = (selectedTimeframe) => {
-    setTimeframe(selectedTimeframe);
-  };
-
-  const handleTabChange = (selectedTab) => {
-    setActiveTab(selectedTab);
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -43,7 +35,7 @@ const Analytics = () => {
         <View style={styles.timeframeContainer}>
           {
             timeframes.map((period, index)=>(
-              <TouchableOpacity style={[styles.timeframeButton]} key={index} onPress={()=>handleTimeframeChange(period)}>
+              <TouchableOpacity style={[styles.timeframeButton]} key={index} onPress={()=>setTimeframe(period)}>
                 <Text style={[styles.timeframeText, {color: timeframe===period ? theme.secondary: theme.text.primary}]}>{period}</Text>
               </TouchableOpacity>
             ))
@@ -55,23 +47,22 @@ const Analytics = () => {
           tabs.map((tab, index)=>(
             <TouchableOpacity 
               style={[
-                styles.tabButton, 
-                {
+                styles.tabButton, {
                   backgroundColor:activeTab===tab ? theme.primary: 'rgba(23,23,24,0.6)',
-                  borderTopLeftRadius: _.first(tabs)===tab && activeTab===tab && 10,
-                  borderBottomLeftRadius: _.first(tabs)===tab && activeTab===tab && 10,
-                  borderTopRightRadius: _.last(tabs)===tab && activeTab===tab && 10,
-                  borderBottomRightRadius: _.last(tabs)===tab && activeTab===tab && 10,
+                  borderTopLeftRadius: _.first(tabs)===tab && 10,
+                  borderBottomLeftRadius: _.first(tabs)===tab && 10,
+                  borderTopRightRadius: _.last(tabs)===tab && 10,
+                  borderBottomRightRadius: _.last(tabs)===tab && 10
                 }
               ]} 
-              key={index} onPress={() => handleTabChange(tab)}>
+              key={index} onPress={() => setActiveTab(tab)}>
               <Text style={[styles.tabText, {color: activeTab===tab ? theme.secondary: theme.text.primary}]}>{tab}</Text>
             </TouchableOpacity>
           ))
         }
       </View>
       <ScrollView style={styles.scrollView}>
-        <Text style={{color:'#fff'}}>hi</Text>
+        <Text style={{color:'#fff'}}>This is a scrolling window</Text>
         {activeTab === 'Summary' && (
           <>
             <BarGraph data={data}/>          
@@ -168,7 +159,9 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    backgroundColor:theme.backgroundColor
+    backgroundColor:theme.backgroundColor,
+    margin: 5,
+    marginTop: 20
   }
 })
 
