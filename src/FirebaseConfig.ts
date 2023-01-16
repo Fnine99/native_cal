@@ -1,4 +1,4 @@
-const FIREBASE_APP = {
+export const FIREBASE_APP = {
     apiKey: "AIzaSyDST4liACzDMmE3ec6HnNUtQwON5Ri6DZw",
     authDomain: "react-cal-bc010.firebaseapp.com",
     projectId: "react-cal-bc010",
@@ -7,5 +7,3 @@ const FIREBASE_APP = {
     appId: "1:348996472846:web:bfb6ce1c72fb06de08ac5f",
     measurementId: "G-SWEXGNWWXV"
   }
-
-export default FIREBASE_APP;

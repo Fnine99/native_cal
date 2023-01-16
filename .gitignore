@@ -11,8 +11,9 @@ npm-debug.*
 web-build/
 
 
-src/FirebaseConfig.ts
 .env
+src/theme.ts
+src/FirebaseConfig.ts
 
 # macOS
 .DS_Store

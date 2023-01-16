@@ -10,7 +10,7 @@ import { LOGIN, LOGOUT } from 'store/reducers/actions';
 import authReducer from 'store/reducers/auth';
 
 // project import
-import FIREBASE_APP  from '../FirebaseConfig';
+import { FIREBASE_APP }  from '../FirebaseConfig';
 
 // firebase initialize
 if (!firebase.apps.length) {
