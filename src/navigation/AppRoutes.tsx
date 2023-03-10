@@ -6,7 +6,6 @@ import { theme } from 'theme';
 import Home from 'screens/Home';
 import Analytics from 'screens/Analytics';
 import Todo from 'screens/Todo';
-import SuccessRegister from 'screens/SuccessRegister';
 
 import Icon from 'components/common/Icon';
 

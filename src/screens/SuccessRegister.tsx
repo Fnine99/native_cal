@@ -20,10 +20,10 @@ export default function SuccessRegister() {
     <SafeAreaView style={styles.container}>
       <StatusBar style='dark'/>
         <Image source={require('../../assets/register.png')} style={{width:100, height:100}}/>        
-        <Text style={[styles.text, {marginTop:30}]}>Hi!<Text style={{fontWeight:'bold'}}> John</Text></Text>
+        <Text style={[styles.text, {marginTop:30}]}>Hi!<Text style={{fontWeight:'bold'}}> Fnine99</Text></Text>
         <Text style={styles.text}>Welcome to Sapphire</Text>
         <TouchableOpacity style={styles.submit} onPress={handlePress}>
-          <Text style={{ fontSize: 16, color:'#FFFFFF', fontWeight:'600'}}>Register</Text>
+          <Text style={{ fontSize: 16, color:'#FFFFFF', fontWeight:'600'}}>Get started</Text>
         </TouchableOpacity>
     </SafeAreaView>
   )
