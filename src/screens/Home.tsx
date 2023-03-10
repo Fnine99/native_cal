@@ -1,36 +1,25 @@
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';  
 import {
     View,
     Text,
+    ScrollView,
     StyleSheet
 } from 'react-native';
 import useAuth from 'hooks/useAuth';
-
-import Calendar from 'components/Calendar';
-import Agenda from 'components/Agenda';
-
-interface calendarProps {}
-interface agendaProps {}
+import { theme } from 'theme';
 
 export default function Home() {
   return (
-    <View 
-      style={{ 
-        flex: 1,
-        backgroundColor: 'lightpink'
-      }}>
-      <View 
-        style={{ 
-          height:'100%',
-          backgroundColor:'#000001',
-          alignItems:'center',
-          justifyContent:'center'
-        }}>
-        <Calendar /> 
-      </View>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style='dark'/> 
+      {/* next step */}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {flex:1, backgroundColor:theme.background.primary, flexDirection:'column'},
+
 
 })

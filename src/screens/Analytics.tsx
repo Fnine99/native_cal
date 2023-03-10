@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 import _ from 'lodash';
 import {
     View,
@@ -29,7 +31,8 @@ const Analytics = () => {
   const [activeTab, setActiveTab] = useState('Summary');
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style='dark'/>
       <View style={styles.header}>
         <Text style={styles.title}>{activeTab}</Text>
         <View style={styles.timeframeContainer}>
@@ -84,7 +87,7 @@ const Analytics = () => {
           </>
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 export default Analytics

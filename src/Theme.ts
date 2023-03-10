@@ -1,7 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 export const theme = {
-  backgroundColor: '#010000',
+  background: {
+    primary:'#2C14DD',
+    secondary:'#F5F7FF'
+  },
   primary: '#171718',
   secondary: '#5096FE',
   borderColor: '#454851',
@@ -15,6 +18,19 @@ export const theme = {
 export const palette = {
   
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // FAFAFA white
 // F7F7FF white ghost white

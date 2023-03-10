@@ -1,9 +1,18 @@
-export const FIREBASE_APP = {
-    apiKey: "AIzaSyDST4liACzDMmE3ec6HnNUtQwON5Ri6DZw",
-    authDomain: "react-cal-bc010.firebaseapp.com",
-    projectId: "react-cal-bc010",
-    storageBucket: "react-cal-bc010.appspot.com",
-    messagingSenderId: "348996472846",
-    appId: "1:348996472846:web:bfb6ce1c72fb06de08ac5f",
-    measurementId: "G-SWEXGNWWXV"
-  }
+import { REACT_APP_FIREBASE_API_key } from '@env';
+import { REACT_APP_FIREBASE_API_authDomain } from '@env';
+import { REACT_APP_FIREBASE_API_projectId } from '@env';
+import { REACT_APP_FIREBASE_API_storageBucket } from '@env';
+import { REACT_APP_FIREBASE_API_messagingSenderId } from '@env';
+import { REACT_APP_FIREBASE_API_appId } from '@env';
+import { REACT_APP_FIREBASE_API_measurementId } from '@env';
+
+
+export const FIREBASE_APP_CONFIG = {
+  apiKey: REACT_APP_FIREBASE_API_key,
+  authDomain: REACT_APP_FIREBASE_API_authDomain,
+  projectId: REACT_APP_FIREBASE_API_projectId,
+  storageBucket: REACT_APP_FIREBASE_API_storageBucket,
+  messagingSenderId: REACT_APP_FIREBASE_API_messagingSenderId,
+  appId: REACT_APP_FIREBASE_API_appId,
+  measurementId: REACT_APP_FIREBASE_API_measurementId,
+}

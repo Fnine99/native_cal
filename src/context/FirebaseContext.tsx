@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+
 import { createContext, useEffect, useReducer, ReactNode } from 'react';
 
 // third-party
@@ -10,12 +10,19 @@ import { LOGIN, LOGOUT } from 'store/reducers/actions';
 import authReducer from 'store/reducers/auth';
 
 // project import
-import { FIREBASE_APP }  from '../FirebaseConfig';
+import { FIREBASE_APP_CONFIG }  from '../FirebaseConfig';
 
 // firebase initialize
 if (!firebase.apps.length) {
-  firebase.initializeApp(FIREBASE_APP);
+  firebase.initializeApp(FIREBASE_APP_CONFIG);
 }
+
+type User = {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+} | null
 
 // const
 const initialState = {
@@ -26,9 +33,9 @@ const initialState = {
 
 // ==============================|| FIREBASE CONTEXT & PROVIDER ||============================== //
 
-const FirebaseContext = createContext(null);
+const FirebaseContext = createContext(initialState);
 
-export const FirebaseProvider = ( children: ReactNode ) => {
+export const FirebaseProvider = ({children}: {children: ReactNode}) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   useEffect(
@@ -38,7 +45,6 @@ export const FirebaseProvider = ( children: ReactNode ) => {
           dispatch({
             type: LOGIN,
             payload: {
-              isLoggedIn: true,
               user: {
                 id: user.uid,
                 email: user.email,
@@ -75,7 +81,7 @@ export const FirebaseProvider = ( children: ReactNode ) => {
   };
 
   const firebaseRegister = async (email:string, password:string) => {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
+    return firebase.auth().createUserWithEmailAndPassword(email, password)
   };
 
   const logout = () => firebase.auth().signOut();
@@ -84,7 +90,7 @@ export const FirebaseProvider = ( children: ReactNode ) => {
     await firebase.auth().sendPasswordResetEmail(email);
   };
 
-  // const updateProfile = () => {};
+  const updateProfile = () => {};
   if (state.isInitialized !== undefined && !state.isInitialized) {
     console.log('loading...');
   }
@@ -101,16 +107,12 @@ export const FirebaseProvider = ( children: ReactNode ) => {
         firebaseFacebookSignIn,
         logout,
         resetPassword,
-        // updateProfile
+        updateProfile
       }}
     >
       {children}
     </FirebaseContext.Provider>
   );
-};
-
-FirebaseProvider.propTypes = {
-  children: PropTypes.node
 };
 
 export default FirebaseContext;

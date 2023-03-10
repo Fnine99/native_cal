@@ -1,4 +1,6 @@
 import { useState, useCallback } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 import {
   View,
   Text,
@@ -15,15 +17,6 @@ import Icon from 'components/common/Icon';
 import AppModal from 'components/common/Modal';
 
 const { width: ScreenWidth, height: ScreenHeight } = Dimensions.get("screen");
-
-// interface SheetList {
-//   Sheet
-// }
-// interface Sheet {
-//   title?: string,
-//   todos?: Array<string>,
-//   id: string
-// }
 
 const mockSheet = [
   {
@@ -78,8 +71,9 @@ export default function Todo() {
 
   const [isAddOpen, setIsAddOpen] = useState(false);
   return (
-    <View style={styles.container} >
-      <ScrollView contentContainerStyle={styles.caroussel} horizontal={true}> 
+    <SafeAreaView style={styles.container} >
+      <StatusBar style='dark'/>
+      <ScrollView contentContainerStyle={styles.caroussel} horizontal> 
         {
           mockSheet.map((sheet, index)=>{
             return renderSheets(sheet, index);
@@ -102,7 +96,7 @@ export default function Todo() {
           <Icon type={'ant'} name={'pluscircleo'} size={22} color={isAddOpen ? 'red' : theme.secondary}/>
         </TouchableOpacity>
       </View>      
-    </View>
+    </SafeAreaView>
 
   );
 }
@@ -111,7 +105,7 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     justifyContent:'center', 
-    backgroundColor:theme.backgroundColor
+    backgroundColor:theme.background.primary
   },
   caroussel: {
     alignItems:'center',

@@ -20,7 +20,7 @@
 // import Login from 'screens/Login';
 // import Home from 'screens/Home';
 // import Analytics from 'screens/Analytics';
-// import Setup from 'screens/Setup';
+// // import Setup from 'screens/Setup';
 
 // const Stack = createNativeStackNavigator();
 // const Tab = createBottomTabNavigator()
