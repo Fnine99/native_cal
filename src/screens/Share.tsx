@@ -36,7 +36,7 @@ const mockSheet = [
   }
 ]
 
-export default function Todo() {
+export default function Share() {
 
   const renderSheetItem = useCallback((item:string, index:number)=>{
     return (

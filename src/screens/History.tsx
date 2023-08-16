@@ -25,7 +25,7 @@ const data = {
   ]
 };
 
-const Analytics = () => {
+const History = () => {
 
   const [timeframe, setTimeframe] = useState('Week');
   const [activeTab, setActiveTab] = useState('Summary');
@@ -90,7 +90,7 @@ const Analytics = () => {
     </SafeAreaView>
   );
 }
-export default Analytics
+export default History
 
 const styles = StyleSheet.create({
   container: {
